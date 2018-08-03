@@ -39,6 +39,6 @@ import aew
 
 And you will have access to the `auth()` function :
 ```
-def auth(login_page, username, password=None)
+aew.auth(login_page, username, password)
 ```
  If the password is not specified, the module will ask it in stdin.
