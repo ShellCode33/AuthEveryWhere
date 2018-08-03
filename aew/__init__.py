@@ -1,3 +1,5 @@
+# coding: utf-8
+
 from splinter import Browser
 import getpass
 
@@ -88,9 +90,6 @@ def auth(login_page, username, password=None):
 
     with Browser(headless=True) as browser:
         browser.visit(login_page)
-        print("At this point I got the following cookies:\n", browser.cookies.all())
-        # browser.fill('q', 'splinter - python acceptance testing for web applications')
-        # Find and click the 'search' button
         forms = browser.find_by_tag("form")
         login_form = None
 
@@ -103,7 +102,7 @@ def auth(login_page, username, password=None):
         else:
             login_form = which_form_looks_more_like_a_login_form(forms)
 
-        print("Choosen login form id is (may be empty, doesn't mean there's no form) : '{}'".format(login_form["id"]))
+        # print("Choosen login form id is (may be empty, doesn't mean there's no form) : '{}'".format(login_form["id"]))
 
         inputs = login_form.find_by_tag("input")
         username_input = None
@@ -132,8 +131,11 @@ def auth(login_page, username, password=None):
         password_input.fill(password)
         submit_button.click()
 
-        print("Once I'm logged in, I got the following cookies:\n", browser.cookies.all())
+        if browser.is_text_present("wrong") or \
+           browser.is_text_present("Wrong") or \
+           browser.is_text_present("Incorrect") or \
+           browser.is_text_present("incorrect"):
+            raise CantLoginException("It seams that you entered an incorrect login or password.")
 
-
-if __name__ == "__main__":
-    auth("https://github.com/login", "ShellCode33")
+        # Verbose mode includes flags such as secure and httponly
+        return browser.cookies.all(verbose=True)
