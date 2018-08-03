@@ -12,7 +12,7 @@ class CantLoginException(Exception):
     pass
 
 
-def which_form_looks_more_like_a_login_form(forms):
+def _which_form_looks_more_like_a_login_form(forms):
 
     # Init forms score
     forms_score = {form: 0 for form in forms}
@@ -100,7 +100,7 @@ def auth(login_page, username, password=None):
             login_form = forms.first
 
         else:
-            login_form = which_form_looks_more_like_a_login_form(forms)
+            login_form = _which_form_looks_more_like_a_login_form(forms)
 
         # print("Choosen login form id is (may be empty, doesn't mean there's no form) : '{}'".format(login_form["id"]))
 
@@ -124,7 +124,7 @@ def auth(login_page, username, password=None):
                     break
 
         if username_input is None or password_input is None or submit_button is None:
-            raise CantLoginException("AAW hasn't been able to log you in. Please report the URL in order to improve "
+            raise CantLoginException("AEW hasn't been able to log you in. Please report the URL in order to improve "
                                      "this library.")
 
         username_input.fill(username)
