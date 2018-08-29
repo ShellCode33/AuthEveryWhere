@@ -10,7 +10,7 @@ You will find a `demo.py` script which logs into GitHub and retrieve your privat
 Nowadays, web developers use more and more Ajax requests to build their websites. It makes it very hard to know where to send the requests in order to authenticate.
 
 Thanks to the WebDrivers, it's possible to "emulate" an entire browser, executing javascript, following redirections, etc.
-What this module does is basically filling the login form and clicking (yeah like a real user's click) the submit button. Once it's logged in, it gathers all the authenticated cookies, and that's it !
+What this module does is basically filling the login form and clicking (yeah like a real user click) the submit button. Once it's logged in, it gathers all the authenticated cookies, and that's it !
 
 Dont be suprised. On older browsers, the `headless` mode doesn't exist. It means that while running the script, you could see a Firefox window open and being manipulated.
 On modern browsers you shouldn't see anything as long as the headless mode is supported.
