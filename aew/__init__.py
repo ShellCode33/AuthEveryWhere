@@ -90,6 +90,7 @@ def auth(login_page, username, password=None):
 
     with Browser(headless=True) as browser:
         browser.visit(login_page)
+        cookies_before_auth = browser.cookies.all(verbose=True)
         forms = browser.find_by_tag("form")
         login_form = None
 
@@ -138,4 +139,17 @@ def auth(login_page, username, password=None):
             raise CantLoginException("It seams that you entered an incorrect login or password.")
 
         # Verbose mode includes flags such as secure and httponly
-        return browser.cookies.all(verbose=True)
+        new_cookies = browser.cookies.all(verbose=True)
+
+        cookies_are_identical = True
+
+        for cookie in new_cookies:
+            if cookie not in cookies_before_auth:
+                cookies_are_identical = False
+                break
+
+        if cookies_are_identical:
+            raise CantLoginException("AEW hasn't been able to log you in. Did you enter the right credentials ?")
+
+        return new_cookies
+
