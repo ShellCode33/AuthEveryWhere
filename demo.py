@@ -11,9 +11,9 @@ def is_cookie_safe(cookie):
 
 
 if __name__ == "__main__":
-    # You can specify the password but the library will ask it if you don't.
+    # You can specify the password as 3rd parameter but the library will ask it if you don't.
     # Better not have any password stored in the source code :)
-    authenticated_cookies = aew.auth("https://github.com/login", "ShellCode33")
+    authenticated_cookies = aew.auth("https://github.com/login", "ShellCode33")  # Can take some time to process
 
     # Without having to know the form parameters, this module is able to authenticate you.
     # Very useful when you want to scrap authenticated websites but you don't want to bother crafting the request.
@@ -29,5 +29,6 @@ if __name__ == "__main__":
     emails = re.findall(r"[\w\.-]+@[\w\.-]+\.\w+", html)  # Regex to find email addresses
 
     print("\nHere are your personal email addresses gathered using authenticated cookies :")
-    for email in list(set(emails)):  # list(set()) removes duplicates
+    for email in set(emails):
         print("- " + email)
+

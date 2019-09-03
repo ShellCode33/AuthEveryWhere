@@ -128,6 +128,7 @@ def auth(login_page, username, password=None):
             raise CantLoginException("AEW hasn't been able to log you in. Please report the URL in order to improve "
                                      "this library.")
 
+        # On some GeckoDriver versions, this is buggy, use pure javascript instead if it happens
         username_input.fill(username)
         password_input.fill(password)
         submit_button.click()
