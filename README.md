@@ -15,7 +15,7 @@ What this module does is basically filling the login form and clicking (yep like
 Dont be suprised, on older browsers the `headless` mode doesn't exist. It means that while running the script, you could see a Firefox window being opened and manipulated.
 On modern browsers you shouldn't see anything as long as the headless mode is supported.
 
-# Use that tool
+# Usage
 If you're using Firefox, install its GeckoDriver.
 
 On Debian-like distributions :
